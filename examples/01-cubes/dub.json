@@ -1,0 +1,16 @@
+{
+    "name": "01-cubes",
+
+    "sourcePaths": ["."],
+    "targetType": "executable",
+
+    "mainSourceFile": "cubes.d",
+
+    "dependencies":
+    {
+        "gfm:sdl2": ">=1.1.3",
+        "derelict_extras-bgfx": {"path": "../../", "version": "~master"}
+    }
+}
+
+

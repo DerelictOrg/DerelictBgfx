@@ -1,0 +1,17 @@
+﻿{
+    "name": "derelict-bgfx",
+    "description": "A dynamic binding to the bgfx library.",
+    "homepage": "https://github.com/DerelictOrg/DerelictBgfx",
+    "license": "Boost",
+    "authors": [
+        "Branimir Karadžić (author of bgfx)",
+        "ponce (D bindings)"
+    ],
+
+    "targetName": "DerelictBgfx",
+    "targetPath": "lib",
+
+    "dependencies": {
+        "derelict-util": ">=1.0.0"
+    }
+}

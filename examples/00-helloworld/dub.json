@@ -1,0 +1,16 @@
+{
+    "name": "00-helloworld",
+
+    "sourcePaths": ["."],
+    "targetType": "executable",
+
+    "mainSourceFile": "helloworld.d",
+
+    "dependencies":
+    {
+        "gfm:sdl2": ">=1.1.3",
+        "derelict_extras-bgfx": {"path": "../../"}
+    }
+}
+
+
