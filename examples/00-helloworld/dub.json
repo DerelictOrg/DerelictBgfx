@@ -8,8 +8,8 @@
 
     "dependencies":
     {
-        "gfm:sdl2": ">=1.1.3",
-        "derelict_extras-bgfx": {"path": "../../"}
+        "gfm:sdl2": ">=1.1.4",
+        "derelict-bgfx": {"path": "../../"}
     }
 }
 
