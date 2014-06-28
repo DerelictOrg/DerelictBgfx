@@ -8,6 +8,9 @@
         "ponce (D bindings)"
     ],
 
+    "importPaths": ["source"],
+    "sourcePaths": ["source"],
+
     "targetName": "DerelictBgfx",
     "targetPath": "lib",
 

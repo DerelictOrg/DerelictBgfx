@@ -9,7 +9,7 @@
     "dependencies":
     {
         "gfm:sdl2": ">=1.1.4",
-        "derelict-bgfx": {"path": "../../"}
+        "derelict-bgfx": {"path": "../../", "version": "~master"}
     }
 }
 
