@@ -41,7 +41,7 @@ private
     import derelict.util.wintypes;
 }
 
-extern(C) nothrow 
+extern(C) @nogc nothrow 
 {
     alias da_bgfx_vertex_decl_begin = void function(bgfx_vertex_decl_t* _decl, bgfx_renderer_type_t _renderer = BGFX_RENDERER_TYPE_NULL);
 
