@@ -39,6 +39,7 @@ private
     import derelict.bgfx.types;
     import derelict.util.xtypes;
     import derelict.util.wintypes;
+    import derelict.util.system;
 }
 
 extern(C) @nogc nothrow 
