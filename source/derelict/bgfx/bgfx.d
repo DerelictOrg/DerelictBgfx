@@ -50,9 +50,9 @@ private
     static if(Derelict_OS_Windows)
         enum libNames = "bgfx-shared-libRelease.dll, bgfx-shared-libDebug.dll";
     else static if (Derelict_OS_Mac)
-        static assert(0, "Need to implement BASS libNames for this operating system.");
+         assert(0, "Need to implement BASS libNames for this operating system.");
     else static if (Derelict_OS_Linux)
-        static assert(0, "Need to implement BASS libNames for this operating system.");
+        enum libNames = "libbgfx-shared-libRelease.so, libbgfx-shared-libDebug.so"; 
     else
         static assert(0, "Need to implement BASS libNames for this operating system.");
 }
