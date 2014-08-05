@@ -143,6 +143,9 @@ extern(C) @nogc nothrow
     alias da_bgfx_set_texture_from_frame_buffer = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_frame_buffer_handle_t _handle, uint8_t _attachment = 0, uint32_t _flags = uint32_t.max);
     alias da_bgfx_submit = uint32_t function(uint8_t _id, int32_t _depth = 0);
     alias da_bgfx_submit_mask = uint32_t function(uint32_t _viewMask, int32_t _depth = 0);
+    alias da_bgfx_set_image = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_texture_handle_t _handle, uint8_t _mip, bgfx_texture_format_t _format, bgfx_access_t _access);
+    alias da_bgfx_set_image_from_frame_buffer = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_frame_buffer_handle_t _handle, uint8_t _attachment, bgfx_texture_format_t _format, bgfx_access_t _access);
+    alias da_bgfx_dispatch = void function(uint8_t _id, bgfx_program_handle_t _handle, uint16_t _numX, uint16_t _numY, uint16_t _numZ);
     alias da_bgfx_discard = void function();
     alias da_bgfx_save_screen_shot = void function(const char* _filePath);
 
@@ -273,6 +276,9 @@ __gshared
     da_bgfx_set_texture_from_frame_buffer bgfx_set_texture_from_frame_buffer;
     da_bgfx_submit bgfx_submit;
     da_bgfx_submit_mask bgfx_submit_mask;
+    da_bgfx_set_image bgfx_set_image;
+    da_bgfx_set_image_from_frame_buffer bgfx_set_image_from_frame_buffer;
+    da_bgfx_dispatch bgfx_dispatch;
     da_bgfx_discard bgfx_discard;
     da_bgfx_save_screen_shot bgfx_save_screen_shot;
 

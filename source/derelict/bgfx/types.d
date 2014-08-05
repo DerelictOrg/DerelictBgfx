@@ -394,6 +394,17 @@ enum : bgfx_renderer_type_t
 
 }
 
+alias bgfx_access_t = int;
+enum : bgfx_access_t
+{
+    BGFX_ACCESS_READ,
+    BGFX_ACCESS_WRITE,
+    BGFX_ACCESS_READWRITE,
+
+    BGFX_ACCESS_COUNT
+
+}
+
 alias bgfx_attrib_t = int;
 enum : bgfx_attrib_t
 {
@@ -437,6 +448,8 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_BC3,
     BGFX_TEXTURE_FORMAT_BC4,
     BGFX_TEXTURE_FORMAT_BC5,
+    BGFX_TEXTURE_FORMAT_BC6H,
+    BGFX_TEXTURE_FORMAT_BC7,
     BGFX_TEXTURE_FORMAT_ETC1,
     BGFX_TEXTURE_FORMAT_ETC2,
     BGFX_TEXTURE_FORMAT_ETC2A,
@@ -453,9 +466,18 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_R8,
     BGFX_TEXTURE_FORMAT_R16,
     BGFX_TEXTURE_FORMAT_R16F,
+    BGFX_TEXTURE_FORMAT_R32,
+    BGFX_TEXTURE_FORMAT_R32F,
+    BGFX_TEXTURE_FORMAT_RG8,
+    BGFX_TEXTURE_FORMAT_RG16,
+    BGFX_TEXTURE_FORMAT_RG16F,
+    BGFX_TEXTURE_FORMAT_RG32,
+    BGFX_TEXTURE_FORMAT_RG32F,
     BGFX_TEXTURE_FORMAT_BGRA8,
     BGFX_TEXTURE_FORMAT_RGBA16,
     BGFX_TEXTURE_FORMAT_RGBA16F,
+    BGFX_TEXTURE_FORMAT_RGBA32,
+    BGFX_TEXTURE_FORMAT_RGBA32F,
     BGFX_TEXTURE_FORMAT_R5G6B5,
     BGFX_TEXTURE_FORMAT_RGBA4,
     BGFX_TEXTURE_FORMAT_RGB5A1,
@@ -640,6 +662,13 @@ struct bgfx_caps_t
     uint16_t maxDrawCalls;      /* < Maximum draw calls.               */
     uint8_t  maxFBAttachments;  /* < Maximum frame buffer attachments. */
 
+    /**
+     * Supported texture formats.
+     * 0 - not supported
+     * 1 - supported
+     * 2 - emulated
+     */
+     uint8_t formats[BGFX_TEXTURE_FORMAT_COUNT];
 }
 
 /**
