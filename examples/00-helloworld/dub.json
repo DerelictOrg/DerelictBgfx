@@ -8,8 +8,7 @@
     "dependencies":
     {
         
-        "gfm:sdl2": {"path" :"/home/rishub/gfm/","version":"~master"},
-        "gfm:core": {"path" :"/home/rishub/gfm/","version":"~master"},
+        "gfm:sdl2": ">=1.1.4",
         "derelict-sdl2": ">=1.2.5",
         "derelict-bgfx": {"path": "../../", "version": "~master"}
     }
