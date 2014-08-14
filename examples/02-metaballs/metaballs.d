@@ -485,6 +485,11 @@ int main(string[] args)
     {
         bgfx_win_set_hwnd(window.getWindowInfo().info.win.window);
     }
+    version(linux)
+            {
+                        bgfx_x11_set_display_window(cast(Display*)window.getWindowInfo().info.x11.display,window.getWindowInfo().info.x11.window);
+                            }
+
     else
     {
         static assert(false, "TODO implement passing window handle to bgfx for this system");

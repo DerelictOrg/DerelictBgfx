@@ -2,6 +2,7 @@
  * Copyright 2011-2014 Branimir Karadzic. All rights reserved.
  * License: http://www.opensource.org/licenses/BSD-2-Clause
  */
+import std.stdio;
 import std.typecons;
 import gfm.core;
 import gfm.sdl2;
@@ -18,17 +19,21 @@ void main()
 
     int width = 1280;
     int height = 720;
-
     // create an OpenGL-enabled SDL window
     auto window = scoped!SDL2Window(sdl2, 
                                     SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                     width, height, 0);
+   
 
     DerelictBgfx.load();
 
     version(Windows)
     {
         bgfx_win_set_hwnd(window.getWindowInfo().info.win.window);
+    }
+    version(linux)
+    {
+        bgfx_x11_set_display_window(cast(Display*)window.getWindowInfo().info.x11.display,window.getWindowInfo().info.x11.window);
     }
     else
     {
@@ -39,7 +44,7 @@ void main()
     scope(exit) bgfx_shutdown();
     bgfx_reset(width, height, BGFX_RESET_VSYNC);
     bgfx_set_debug(BGFX_DEBUG_TEXT);
-    
+   
     // Set view 0 clear state.
     bgfx_set_view_clear(0
                         , BGFX_CLEAR_COLOR_BIT|BGFX_CLEAR_DEPTH_BIT

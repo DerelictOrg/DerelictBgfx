@@ -3,12 +3,14 @@
 
     "sourcePaths": ["."],
     "targetType": "executable",
-
     "mainSourceFile": "helloworld.d",
 
     "dependencies":
     {
-        "gfm:sdl2": ">=1.1.4",
+        
+        "gfm:sdl2": {"path" :"/home/rishub/gfm/","version":"~master"},
+        "gfm:core": {"path" :"/home/rishub/gfm/","version":"~master"},
+        "derelict-sdl2": ">=1.2.5",
         "derelict-bgfx": {"path": "../../", "version": "~master"}
     }
 }
