@@ -52,7 +52,7 @@ private
     else static if (Derelict_OS_Mac)
         static assert(0, "Need to implement BASS libNames for this operating system.");
     else static if (Derelict_OS_Linux)
-        static assert(0, "Need to implement BASS libNames for this operating system.");
+        enum libNames = "libbgfx-shared-libRelease.so, libbgfx-shared-libDebug.so, ./libbgfx-shared-libRelease.so, ./libbgfx-shared-libDebug.so";
     else
         static assert(0, "Need to implement BASS libNames for this operating system.");
 }
@@ -160,6 +160,9 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_set_texture_from_frame_buffer, "bgfx_set_texture_from_frame_buffer");
             bindFunc(cast(void**)&bgfx_submit, "bgfx_submit");
             bindFunc(cast(void**)&bgfx_submit_mask, "bgfx_submit_mask");
+            bindFunc(cast(void**)&bgfx_set_image, "bgfx_set_image");
+            bindFunc(cast(void**)&bgfx_set_image_from_frame_buffer, "bgfx_set_image_from_frame_buffer");
+            bindFunc(cast(void**)&bgfx_dispatch, "bgfx_dispatch");
             bindFunc(cast(void**)&bgfx_discard, "bgfx_discard");
             bindFunc(cast(void**)&bgfx_save_screen_shot, "bgfx_save_screen_shot");
 
