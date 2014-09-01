@@ -31,7 +31,7 @@ void main()
     {
         bgfx_win_set_hwnd(window.getWindowInfo().info.win.window);
     }
-    version(linux)
+    else version(linux)
     {
         bgfx_x11_set_display_window(cast(Display*)window.getWindowInfo().info.x11.display,window.getWindowInfo().info.x11.window);
     }
