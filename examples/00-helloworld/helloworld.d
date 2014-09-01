@@ -2,6 +2,7 @@
  * Copyright 2011-2014 Branimir Karadzic. All rights reserved.
  * License: http://www.opensource.org/licenses/BSD-2-Clause
  */
+
 import std.typecons;
 import gfm.core;
 import gfm.sdl2;
@@ -30,6 +31,10 @@ void main()
     {
         bgfx_win_set_hwnd(window.getWindowInfo().info.win.window);
     }
+    version(linux)
+    {
+        bgfx_x11_set_display_window(cast(Display*)window.getWindowInfo().info.x11.display,window.getWindowInfo().info.x11.window);
+    }
     else
     {
         static assert(false, "TODO implement passing window handle to bgfx for this system");
@@ -39,7 +44,7 @@ void main()
     scope(exit) bgfx_shutdown();
     bgfx_reset(width, height, BGFX_RESET_VSYNC);
     bgfx_set_debug(BGFX_DEBUG_TEXT);
-    
+
     // Set view 0 clear state.
     bgfx_set_view_clear(0
                         , BGFX_CLEAR_COLOR_BIT|BGFX_CLEAR_DEPTH_BIT
