@@ -349,6 +349,7 @@ enum ulong BGFX_CAPS_FRAGMENT_DEPTH         = 0x0000000000000040;
 enum ulong BGFX_CAPS_BLEND_INDEPENDENT      = 0x0000000000000080;
 enum ulong BGFX_CAPS_COMPUTE                = 0x0000000000000100;
 enum ulong BGFX_CAPS_FRAGMENT_ORDERING      = 0x0000000000000200;
+enum ulong BGFX_CAPS_SWAP_CHAIN             = 0x0000000000000400;
 
 // bgfx.c99.h
 
@@ -358,7 +359,7 @@ enum : bgfx_renderer_type_t
     BGFX_RENDERER_TYPE_NULL,
     BGFX_RENDERER_TYPE_DIRECT3D9,
     BGFX_RENDERER_TYPE_DIRECT3D11,
-    BGFX_RENDERER_TYPE_OPENGLES,
+    BGFX_RENDERER_TYPE_OPENGLES = 4,
     BGFX_RENDERER_TYPE_OPENGL,
 
     BGFX_RENDERER_TYPE_COUNT
@@ -547,6 +548,12 @@ struct bgfx_memory_t
     uint32_t size;
 }
 
+struct bgfx_transform_t
+{
+    float* data; //< Pointer to first matrix.
+    uint16_t num; //< Number of matrices.
+}
+
 /**
  * Vertex declaration.
  */
@@ -625,13 +632,6 @@ struct bgfx_caps_t
      */
     uint64_t supported;
 
-    /**
-     *  Emulated functionality. For example some texture compression
-     *  modes are not natively supported by all renderers. The library
-     *  internally decompresses texture into supported format.
-     */
-    uint64_t emulated;
-
     uint16_t maxTextureSize;    /* < Maximum texture size.             */
     uint16_t maxDrawCalls;      /* < Maximum draw calls.               */
     uint8_t  maxFBAttachments;  /* < Maximum frame buffer attachments. */
@@ -656,6 +656,9 @@ enum : bgfx_fatal_t
     BGFX_FATAL_INVALID_SHADER,
     BGFX_FATAL_UNABLE_TO_INITIALIZE,
     BGFX_FATAL_UNABLE_TO_CREATE_TEXTURE,
+    BGFX_FATAL_DEVICE_LOST,
+
+    BGFX_FATAL_COUNT
 }
 
 //TODO: use namespace when DMD 2.066 is released
