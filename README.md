@@ -8,7 +8,8 @@ For information on how to build DerelictBgfx and link it with your programs, ple
 
 For information on how to load the bgfx library via DerelictBgfx, see the page [DerelictUtil for Users](https://github.com/DerelictOrg/DerelictUtil/wiki/DerelictUtil-for-Users) at the DerelictUtil Wiki. In the meantime, here's some sample code.
 
-**This binding does not come with bgfx binaries. You have to build it by yourself.**
+**Warning: these bindings do not come with bgfx binaries. **
+More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
 ```D
 import derelict.bgfx.bgfx;
