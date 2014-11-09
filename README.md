@@ -10,6 +10,8 @@ For information on how to load the bgfx library via DerelictBgfx, see the page [
 
 **Warning: these bindings do not come with bgfx binaries.**
 
+**Note: this DerelictBgfx binding commit is in sync with bgfx Nov 6, 2014 commit titled "Added .editorconfig."**
+
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
 ```D
