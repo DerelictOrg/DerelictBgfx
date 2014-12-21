@@ -72,6 +72,7 @@ enum ulong BGFX_STATE_BLEND_INV_FACTOR     = 0x000000000000d000;
 enum BGFX_STATE_BLEND_SHIFT                = 12;
 enum ulong BGFX_STATE_BLEND_MASK           = 0x000000000ffff000;
 
+enum ulong BGFX_STATE_BLEND_EQUATION_ADD    = 0x0000000000000000;
 enum ulong BGFX_STATE_BLEND_EQUATION_SUB    = 0x0000000010000000;
 enum ulong BGFX_STATE_BLEND_EQUATION_REVSUB = 0x0000000020000000;
 enum ulong BGFX_STATE_BLEND_EQUATION_MIN    = 0x0000000030000000;
@@ -91,9 +92,10 @@ enum ulong BGFX_STATE_ALPHA_REF_MASK        = 0x0000ff0000000000;
 
 enum ulong BGFX_STATE_PT_TRISTRIP           = 0x0001000000000000;
 enum ulong BGFX_STATE_PT_LINES              = 0x0002000000000000;
-enum ulong BGFX_STATE_PT_POINTS             = 0x0003000000000000;
+enum ulong BGFX_STATE_PT_LINESTRIP          = 0x0003000000000000;
+enum ulong BGFX_STATE_PT_POINTS             = 0x0004000000000000;
 enum BGFX_STATE_PT_SHIFT                    = 48;
-enum ulong BGFX_STATE_PT_MASK               = 0x0003000000000000;
+enum ulong BGFX_STATE_PT_MASK               = 0x0007000000000000;
 
 enum BGFX_STATE_POINT_SIZE_SHIFT            = 52;
 enum ulong BGFX_STATE_POINT_SIZE_MASK       = 0x0ff0000000000000;
@@ -269,6 +271,11 @@ enum uint BGFX_DEBUG_IFH                   = 0x00000002;
 enum uint BGFX_DEBUG_STATS                 = 0x00000004;
 enum uint BGFX_DEBUG_TEXT                  = 0x00000008;
 
+enum ubyte BGFX_BUFFER_COMPUTE_NONE        = 0x00;
+enum ubyte BGFX_BUFFER_COMPUTE_READ        = 0x01;
+enum ubyte BGFX_BUFFER_COMPUTE_WRITE       = 0x02;
+enum ubyte BGFX_BUFFER_COMPUTE_READ_WRITE  = (BGFX_BUFFER_COMPUTE_READ | BGFX_BUFFER_COMPUTE_WRITE);
+
 enum uint BGFX_TEXTURE_NONE                = 0x00000000;
 enum uint BGFX_TEXTURE_U_MIRROR            = 0x00000001;
 enum uint BGFX_TEXTURE_U_CLAMP             = 0x00000002;
@@ -337,6 +344,9 @@ enum BGFX_RESET_MSAA_SHIFT                 = 4;
 enum uint BGFX_RESET_MSAA_MASK             = 0x00000070;
 enum uint BGFX_RESET_VSYNC                 = 0x00000080;
 enum uint BGFX_RESET_CAPTURE               = 0x00000100;
+enum uint BGFX_RESET_HMD                   = 0x00000200;
+enum uint BGFX_RESET_HMD_DEBUG             = 0x00000400;
+enum uint BGFX_RESET_HMD_RECENTER          = 0x00000800;
 
 ///
 enum ulong BGFX_CAPS_TEXTURE_COMPARE_LEQUAL = 0x0000000000000001;
@@ -350,6 +360,10 @@ enum ulong BGFX_CAPS_BLEND_INDEPENDENT      = 0x0000000000000080;
 enum ulong BGFX_CAPS_COMPUTE                = 0x0000000000000100;
 enum ulong BGFX_CAPS_FRAGMENT_ORDERING      = 0x0000000000000200;
 enum ulong BGFX_CAPS_SWAP_CHAIN             = 0x0000000000000400;
+enum ulong BGFX_CAPS_HMD                    = 0x0000000000000800;
+
+enum ubyte BGFX_VIEW_NONE   = 0x00;
+enum ubyte BGFX_VIEW_STEREO = 0x01;
 
 // bgfx.c99.h
 
@@ -550,8 +564,27 @@ struct bgfx_memory_t
 
 struct bgfx_transform_t
 {
-    float* data; //< Pointer to first matrix.
-    uint16_t num; //< Number of matrices.
+    float* data;
+    uint16_t num;
+}
+
+struct bgfx_hmd_t
+{
+    /**
+     * Eye
+     */
+    struct Eye
+    {
+        float rotation[4];
+        float translation[3];
+        float fov[4];
+        float adjust[3];
+        float pixelsPerTanAngle[2];
+    };
+
+    Eye eye[2];
+    uint16_t width;
+    uint16_t height;
 }
 
 /**
@@ -595,8 +628,8 @@ struct bgfx_instance_data_buffer_t
     uint8_t* data;
     uint32_t size;
     uint32_t offset;
-    uint16_t stride;
     uint16_t num;
+    uint16_t stride;
     bgfx_vertex_buffer_handle_t handle;
 
 }
