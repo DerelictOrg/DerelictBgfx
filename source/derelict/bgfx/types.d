@@ -115,12 +115,12 @@ enum ulong BGFX_STATE_DEFAULT = 0
 ulong BGFX_STATE_ALPHA_REF(ulong _ref) pure nothrow
 {
     return (_ref << BGFX_STATE_ALPHA_REF_SHIFT) & BGFX_STATE_ALPHA_REF_MASK;
-} 
+}
 
 ulong BGFX_STATE_POINT_SIZE(ulong _size) pure nothrow
 {
     return (_size << BGFX_STATE_POINT_SIZE_SHIFT) & BGFX_STATE_POINT_SIZE_MASK;
-} 
+}
 
 ulong BGFX_STATE_BLEND_FUNC_SEPARATE(ulong _srcRGB, ulong _dstRGB, ulong _srcA, ulong _dstA) pure nothrow
 {
@@ -316,7 +316,7 @@ enum uint BGFX_TEXTURE_COMPUTE_WRITE       = 0x00100000;
 enum BGFX_TEXTURE_RESERVED_SHIFT           = 24;
 enum uint BGFX_TEXTURE_RESERVED_MASK       = 0xff000000;
 
-enum uint BGFX_TEXTURE_SAMPLER_BITS_MASK = 0 
+enum uint BGFX_TEXTURE_SAMPLER_BITS_MASK = 0
       | BGFX_TEXTURE_U_MASK
       | BGFX_TEXTURE_V_MASK
       | BGFX_TEXTURE_W_MASK
@@ -502,42 +502,42 @@ struct bgfx_dynamic_vertex_buffer_handle_t
     ushort idx;
 }
 
-struct bgfx_frame_buffer_handle_t 
+struct bgfx_frame_buffer_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_index_buffer_handle_t 
+struct bgfx_index_buffer_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_program_handle_t 
+struct bgfx_program_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_shader_handle_t 
+struct bgfx_shader_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_texture_handle_t 
+struct bgfx_texture_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_uniform_handle_t 
+struct bgfx_uniform_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_vertex_buffer_handle_t 
+struct bgfx_vertex_buffer_handle_t
 {
     ushort idx;
 }
 
-struct bgfx_vertex_decl_handle_t 
+struct bgfx_vertex_decl_handle_t
 {
     ushort idx;
 }
@@ -561,8 +561,8 @@ struct bgfx_vertex_decl_t
 {
     uint32_t hash;
     uint16_t stride;
-    uint16_t offset[BGFX_ATTRIB_COUNT];
-    uint8_t  attributes[BGFX_ATTRIB_COUNT];
+    uint16_t[BGFX_ATTRIB_COUNT] offset;
+    uint8_t[BGFX_ATTRIB_COUNT] attributes;
 }
 
 /**
@@ -642,7 +642,7 @@ struct bgfx_caps_t
      * 1 - supported
      * 2 - emulated
      */
-     uint8_t formats[BGFX_TEXTURE_FORMAT_COUNT];
+     uint8_t[BGFX_TEXTURE_FORMAT_COUNT] formats;
 }
 
 /**
@@ -663,7 +663,7 @@ enum : bgfx_fatal_t
 
 //TODO: use namespace when DMD 2.066 is released
 extern(C++)/*, bgfx)*/ interface CallbackI
-{    
+{
     void fatal(bgfx_fatal_t _code, const(char)* _str);
     uint32_t cacheReadSize(uint64_t _id);
     bool cacheRead(uint64_t _id, void* _data, uint32_t _size);
@@ -676,7 +676,7 @@ extern(C++)/*, bgfx)*/ interface CallbackI
 
 //TODO: use namespace when DMD 2.066 is released
 extern(C++ /*, bx */) interface ReallocatorI
-{    
+{
     void* alloc(size_t _size, size_t _align, const(char)* _file, uint32_t _line);
     void free(void* _ptr, size_t _align, const(char)* _file, uint32_t _line);
     void* realloc(void* _ptr, size_t _size, size_t _align, const(char)* _file, uint32_t _line);

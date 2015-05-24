@@ -42,20 +42,20 @@ private
     import derelict.util.system;
 }
 
-extern(C) @nogc nothrow 
+extern(C) @nogc nothrow
 {
     alias da_bgfx_vertex_decl_begin = void function(bgfx_vertex_decl_t* _decl, bgfx_renderer_type_t _renderer = BGFX_RENDERER_TYPE_NULL);
 
     alias da_bgfx_vertex_decl_add = void function(bgfx_vertex_decl_t* _decl, bgfx_attrib_t _attrib, uint8_t _num, bgfx_attrib_type_t _type, bool _normalized = false, bool _asInt = false);
     alias da_bgfx_vertex_decl_skip = void function(bgfx_vertex_decl_t* _decl, uint8_t _num);
     alias da_bgfx_vertex_decl_end = void function(bgfx_vertex_decl_t* _decl);
-    alias da_bgfx_vertex_pack = void function(const float _input[4], bool _inputNormalized, bgfx_attrib_t _attr, const bgfx_vertex_decl_t* _decl, void* _data, uint32_t _index = 0);
-    alias da_bgfx_vertex_unpack = void function(float _output[4], bgfx_attrib_t _attr, const bgfx_vertex_decl_t* _decl, const void* _data, uint32_t _index = 0);
+    alias da_bgfx_vertex_pack = void function(const float[4] _input, bool _inputNormalized, bgfx_attrib_t _attr, const bgfx_vertex_decl_t* _decl, void* _data, uint32_t _index = 0);
+    alias da_bgfx_vertex_unpack = void function(float[4] _output, bgfx_attrib_t _attr, const bgfx_vertex_decl_t* _decl, const void* _data, uint32_t _index = 0);
     alias da_bgfx_vertex_convert = void function(const bgfx_vertex_decl_t* _destDecl, void* _destData, const bgfx_vertex_decl_t* _srcDecl, const void* _srcData, uint32_t _num = 1);
     alias da_bgfx_weld_vertices = uint16_t function(uint16_t* _output, const bgfx_vertex_decl_t* _decl, const void* _data, uint16_t _num, float _epsilon = 0.001f);
     alias da_bgfx_image_swizzle_bgra8 = void function(uint32_t _width, uint32_t _height, uint32_t _pitch, const void* _src, void* _dst);
     alias da_bgfx_image_rgba8_downsample_2x2 = void function(uint32_t _width, uint32_t _height, uint32_t _pitch, const void* _src, void* _dst);
-    alias da_bgfx_get_supported_renderers = uint8_t function(bgfx_renderer_type_t _enum[BGFX_RENDERER_TYPE_COUNT]);
+    alias da_bgfx_get_supported_renderers = uint8_t function(bgfx_renderer_type_t[BGFX_RENDERER_TYPE_COUNT] _enum);
     alias da_bgfx_get_renderer_name = const char* function(bgfx_renderer_type_t _type);
 
     // TODO once DMD 2.066 is release, pass extern(C++) interfaces here
@@ -111,7 +111,7 @@ extern(C) @nogc nothrow
     alias da_bgfx_destroy_frame_buffer = void function(bgfx_frame_buffer_handle_t _handle);
     alias da_bgfx_create_uniform = bgfx_uniform_handle_t function(const char* _name, bgfx_uniform_type_t _type, uint16_t _num = 1);
     alias da_bgfx_destroy_uniform = void function(bgfx_uniform_handle_t _handle);
-    alias da_bgfx_set_clear_color = void function(uint8_t _index, const float _rgba[4]);
+    alias da_bgfx_set_clear_color = void function(uint8_t _index, const float[4] _rgba);
     alias da_bgfx_set_view_name = void function(uint8_t _id, const char* _name);
     alias da_bgfx_set_view_rect = void function(uint8_t _id, uint16_t _x, uint16_t _y, uint16_t _width, uint16_t _height);
     alias da_bgfx_set_view_scissor = void function(uint8_t _id, uint16_t _x = 0, uint16_t _y = 0, uint16_t _width = 0, uint16_t _height = 0);
@@ -294,7 +294,7 @@ __gshared
     }
 
     version(Windows)
-    {  
+    {
         da_bgfx_win_set_hwnd bgfx_win_set_hwnd;
     }
 }
