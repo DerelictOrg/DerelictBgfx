@@ -118,12 +118,12 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_get_shader_uniforms, "bgfx_get_shader_uniforms");
             bindFunc(cast(void**)&bgfx_destroy_shader, "bgfx_destroy_shader");
             bindFunc(cast(void**)&bgfx_create_program, "bgfx_create_program");
-            bindFunc(cast(void**)&bgfx_create_compute_program, "create_compute_program");
+            bindFunc(cast(void**)&bgfx_create_compute_program, "bgfx_create_compute_program");
             bindFunc(cast(void**)&bgfx_destroy_program, "bgfx_destroy_program");
             bindFunc(cast(void**)&bgfx_calc_texture_size, "bgfx_calc_texture_size");
             bindFunc(cast(void**)&bgfx_create_texture, "bgfx_create_texture");
             bindFunc(cast(void**)&bgfx_create_texture_2d, "bgfx_create_texture_2d");
-            bindFunc(cast(void**)&bgfx_create_texture_2d_scaled, "create_texture_2d_scaled");
+            bindFunc(cast(void**)&bgfx_create_texture_2d_scaled, "bgfx_create_texture_2d_scaled");
             bindFunc(cast(void**)&bgfx_create_texture_3d, "bgfx_create_texture_3d");
             bindFunc(cast(void**)&bgfx_create_texture_cube, "bgfx_create_texture_cube");
             bindFunc(cast(void**)&bgfx_update_texture_2d, "bgfx_update_texture_2d");
@@ -131,7 +131,7 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_update_texture_cube, "bgfx_update_texture_cube");
             bindFunc(cast(void**)&bgfx_destroy_texture, "bgfx_destroy_texture");
             bindFunc(cast(void**)&bgfx_create_frame_buffer, "bgfx_create_frame_buffer");
-            bindFunc(cast(void**)&bgfx_create_frame_buffer_scaled, "create_frame_buffer_scaled");
+            bindFunc(cast(void**)&bgfx_create_frame_buffer_scaled, "bgfx_create_frame_buffer_scaled");
             bindFunc(cast(void**)&bgfx_create_frame_buffer_from_handles, "bgfx_create_frame_buffer_from_handles");
             bindFunc(cast(void**)&bgfx_destroy_frame_buffer, "bgfx_destroy_frame_buffer");
             bindFunc(cast(void**)&bgfx_create_uniform, "bgfx_create_uniform");
