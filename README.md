@@ -5,7 +5,7 @@ A dynamic binding to [bgfx](https://github.com/bkaradzic/bgfx/) for the D Progra
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Nov 6, 2014 commit titled "Added .editorconfig."**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Aug 30, 2015 commit titled "D3D12: Cleanup."**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
@@ -13,7 +13,7 @@ Please see the pages [Building and Linking Derelict](http://derelictorg.github.i
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Dec 21, 2014 commit titled "Win: Capture mouse when mouse button is down."**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Aug 30, 2015 commit titled "D3D12: Cleanup."**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
