@@ -96,7 +96,7 @@ extern(C) @nogc nothrow
     alias da_bgfx_alloc_transient_buffers = bool function(bgfx_transient_vertex_buffer_t* _tvb, const(bgfx_vertex_decl_t)* _decl, uint32_t _numVertices, bgfx_transient_index_buffer_t* _tib, uint32_t _numIndices);
     alias da_bgfx_alloc_instance_data_buffer = const(bgfx_instance_data_buffer_t)* function(uint32_t _num, uint16_t _stride);
     alias da_bgfx_create_indirect_buffer = bgfx_indirect_buffer_handle_t function(uint32_t _num);
-	alias da_bgfx_destroy_indirect_buffer = void function(bgfx_indirect_buffer_handle_t _handle);
+    alias da_bgfx_destroy_indirect_buffer = void function(bgfx_indirect_buffer_handle_t _handle);
     alias da_bgfx_create_shader = bgfx_shader_handle_t function(const bgfx_memory_t* _mem);
     alias da_bgfx_get_shader_uniforms = uint16_t function(bgfx_shader_handle_t _handle, bgfx_uniform_handle_t* _uniforms = null, uint16_t _max = 0);
     alias da_bgfx_destroy_shader = void function(bgfx_shader_handle_t _handle);
@@ -169,7 +169,7 @@ extern(C) @nogc nothrow
     // bgfxplatform.c99.h
 
     alias da_bgfx_render_frame = bgfx_render_frame_t function();
-	alias da_bgfx_set_platform_data = void function(bgfx_platform_data_t* _pd);
+    alias da_bgfx_set_platform_data = void function(bgfx_platform_data_t* _pd);
 	
 }
 
@@ -295,27 +295,6 @@ __gshared
     da_bgfx_save_screen_shot bgfx_save_screen_shot;
 
     da_bgfx_render_frame bgfx_render_frame;
-<<<<<<< HEAD
+    da_bgfx_set_platform_data bgfx_set_platform_data;
 
-    version (Android)
-    {
-        da_bgfx_android_set_window bgfx_android_set_window;
-    }
-    version(linux)
-    {
-        da_bgfx_x11_set_display_window bgfx_x11_set_display_window;
-    }
-
-    version(OSX)
-    {
-        da_bgfx_osx_set_ns_window bgfx_osx_set_ns_window;
-    }
-
-    version(Windows)
-    {
-        da_bgfx_win_set_hwnd bgfx_win_set_hwnd;
-    }
-=======
-	da_bgfx_set_platform_data bgfx_set_platform_data;
->>>>>>> update API
 }

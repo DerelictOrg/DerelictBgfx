@@ -743,12 +743,8 @@ struct bgfx_vertex_decl_t
     uint32_t hash;
     uint16_t stride;
     uint16_t[BGFX_ATTRIB_COUNT] offset;
-<<<<<<< HEAD
-    uint8_t[BGFX_ATTRIB_COUNT] attributes;
-=======
     uint16_t[BGFX_ATTRIB_COUNT]  attributes;
-    
->>>>>>> update API
+
 }
 
 /**
@@ -825,22 +821,12 @@ struct bgfx_caps_t
     uint8_t  maxFBAttachments;
     uint8_t  numGPUs;
 
-<<<<<<< HEAD
-    /**
-     * Supported texture formats.
-     * 0 - not supported
-     * 1 - supported
-     * 2 - emulated
-     */
-     uint8_t[BGFX_TEXTURE_FORMAT_COUNT] formats;
-=======
     uint16_t vendorId;
     uint16_t deviceId;
     bgfx_caps_gpu_t[4] gpu;
 
     uint8_t[BGFX_TEXTURE_FORMAT_COUNT] formats;
     
->>>>>>> update API
 }
 
 /**
