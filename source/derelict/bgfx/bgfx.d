@@ -82,12 +82,16 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_frame, "bgfx_frame");
             bindFunc(cast(void**)&bgfx_get_renderer_type, "bgfx_get_renderer_type");
             bindFunc(cast(void**)&bgfx_get_caps, "bgfx_get_caps");
+            bindFunc(cast(void**)&bgfx_get_hmd, "bgfx_get_hmd");
+            bindFunc(cast(void**)&bgfx_get_stats, "bgfx_get_stats");
             bindFunc(cast(void**)&bgfx_alloc, "bgfx_alloc");
             bindFunc(cast(void**)&bgfx_copy, "bgfx_copy");
             bindFunc(cast(void**)&bgfx_make_ref, "bgfx_make_ref");
+            bindFunc(cast(void**)&bgfx_make_ref_release, "bgfx_make_ref_release");
             bindFunc(cast(void**)&bgfx_set_debug, "bgfx_set_debug");
             bindFunc(cast(void**)&bgfx_dbg_text_clear, "bgfx_dbg_text_clear");
             bindFunc(cast(void**)&bgfx_dbg_text_printf, "bgfx_dbg_text_printf");
+            bindFunc(cast(void**)&bgfx_dbg_text_image, "bgfx_dbg_text_image");
             bindFunc(cast(void**)&bgfx_create_index_buffer, "bgfx_create_index_buffer");
             bindFunc(cast(void**)&bgfx_destroy_index_buffer, "bgfx_destroy_index_buffer");
             bindFunc(cast(void**)&bgfx_create_vertex_buffer, "bgfx_create_vertex_buffer");
@@ -108,14 +112,18 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_alloc_transient_vertex_buffer, "bgfx_alloc_transient_vertex_buffer");
             bindFunc(cast(void**)&bgfx_alloc_transient_buffers, "bgfx_alloc_transient_buffers");
             bindFunc(cast(void**)&bgfx_alloc_instance_data_buffer, "bgfx_alloc_instance_data_buffer");
+            bindFunc(cast(void**)&bgfx_create_indirect_buffer, "bgfx_create_indirect_buffer");
+            bindFunc(cast(void**)&bgfx_destroy_indirect_buffer, "bgfx_destroy_indirect_buffer");
             bindFunc(cast(void**)&bgfx_create_shader, "bgfx_create_shader");
             bindFunc(cast(void**)&bgfx_get_shader_uniforms, "bgfx_get_shader_uniforms");
             bindFunc(cast(void**)&bgfx_destroy_shader, "bgfx_destroy_shader");
             bindFunc(cast(void**)&bgfx_create_program, "bgfx_create_program");
+            bindFunc(cast(void**)&bgfx_create_compute_program, "bgfx_create_compute_program");
             bindFunc(cast(void**)&bgfx_destroy_program, "bgfx_destroy_program");
             bindFunc(cast(void**)&bgfx_calc_texture_size, "bgfx_calc_texture_size");
             bindFunc(cast(void**)&bgfx_create_texture, "bgfx_create_texture");
             bindFunc(cast(void**)&bgfx_create_texture_2d, "bgfx_create_texture_2d");
+            bindFunc(cast(void**)&bgfx_create_texture_2d_scaled, "bgfx_create_texture_2d_scaled");
             bindFunc(cast(void**)&bgfx_create_texture_3d, "bgfx_create_texture_3d");
             bindFunc(cast(void**)&bgfx_create_texture_cube, "bgfx_create_texture_cube");
             bindFunc(cast(void**)&bgfx_update_texture_2d, "bgfx_update_texture_2d");
@@ -123,6 +131,7 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_update_texture_cube, "bgfx_update_texture_cube");
             bindFunc(cast(void**)&bgfx_destroy_texture, "bgfx_destroy_texture");
             bindFunc(cast(void**)&bgfx_create_frame_buffer, "bgfx_create_frame_buffer");
+            bindFunc(cast(void**)&bgfx_create_frame_buffer_scaled, "bgfx_create_frame_buffer_scaled");
             bindFunc(cast(void**)&bgfx_create_frame_buffer_from_handles, "bgfx_create_frame_buffer_from_handles");
             bindFunc(cast(void**)&bgfx_destroy_frame_buffer, "bgfx_destroy_frame_buffer");
             bindFunc(cast(void**)&bgfx_create_uniform, "bgfx_create_uniform");
@@ -136,6 +145,8 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_set_view_seq, "bgfx_set_view_seq");
             bindFunc(cast(void**)&bgfx_set_view_frame_buffer, "bgfx_set_view_frame_buffer");
             bindFunc(cast(void**)&bgfx_set_view_transform, "bgfx_set_view_transform");
+            bindFunc(cast(void**)&bgfx_set_view_transform_stereo, "bgfx_set_view_transform_stereo");
+            bindFunc(cast(void**)&bgfx_set_view_remap, "bgfx_set_view_remap");
             bindFunc(cast(void**)&bgfx_set_marker, "bgfx_set_marker");
             bindFunc(cast(void**)&bgfx_set_state, "bgfx_set_state");
             bindFunc(cast(void**)&bgfx_set_stencil, "bgfx_set_stencil");
@@ -152,37 +163,28 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_set_dynamic_vertex_buffer, "bgfx_set_dynamic_vertex_buffer");
             bindFunc(cast(void**)&bgfx_set_transient_vertex_buffer, "bgfx_set_transient_vertex_buffer");
             bindFunc(cast(void**)&bgfx_set_instance_data_buffer, "bgfx_set_instance_data_buffer");
-            bindFunc(cast(void**)&bgfx_set_program, "bgfx_set_program");
+            bindFunc(cast(void**)&bgfx_set_instance_data_from_vertex_buffer, "bgfx_set_instance_data_from_vertex_buffer");
+            bindFunc(cast(void**)&bgfx_set_instance_data_from_dynamic_vertex_buffer, "bgfx_set_instance_data_from_dynamic_vertex_buffer");
             bindFunc(cast(void**)&bgfx_set_texture, "bgfx_set_texture");
             bindFunc(cast(void**)&bgfx_set_texture_from_frame_buffer, "bgfx_set_texture_from_frame_buffer");
+            bindFunc(cast(void**)&bgfx_touch, "bgfx_touch");
             bindFunc(cast(void**)&bgfx_submit, "bgfx_submit");
+            bindFunc(cast(void**)&bgfx_submit_indirect, "bgfx_submit_indirect");
             bindFunc(cast(void**)&bgfx_set_image, "bgfx_set_image");
             bindFunc(cast(void**)&bgfx_set_image_from_frame_buffer, "bgfx_set_image_from_frame_buffer");
+            bindFunc(cast(void**)&bgfx_set_compute_index_buffer, "bgfx_set_compute_index_buffer");
+            bindFunc(cast(void**)&bgfx_set_compute_vertex_buffer, "bgfx_set_compute_vertex_buffer");
+            bindFunc(cast(void**)&bgfx_set_compute_dynamic_index_buffer, "bgfx_set_compute_dynamic_index_buffer");
+            bindFunc(cast(void**)&bgfx_set_compute_dynamic_vertex_buffer, "bgfx_set_compute_dynamic_vertex_buffer");
+            bindFunc(cast(void**)&bgfx_set_compute_indirect_buffer, "bgfx_set_compute_indirect_buffer");
             bindFunc(cast(void**)&bgfx_dispatch, "bgfx_dispatch");
+            bindFunc(cast(void**)&bgfx_dispatch_indirect, "bgfx_dispatch_indirect");
             bindFunc(cast(void**)&bgfx_discard, "bgfx_discard");
             bindFunc(cast(void**)&bgfx_save_screen_shot, "bgfx_save_screen_shot");
 
             bindFunc(cast(void**)&bgfx_render_frame, "bgfx_render_frame");
-
-            version (Android)
-            {
-                bindFunc(cast(void**)&bgfx_android_set_window, "bgfx_android_set_window");
-            }
-
-            version(linux)
-            {
-                bindFunc(cast(void**)&bgfx_x11_set_display_window, "bgfx_x11_set_display_window");
-            }
-
-            version(OSX)
-            {
-                bindFunc(cast(void**)&bgfx_osx_set_ns_window, "bgfx_osx_set_ns_window");
-            }
-
-            version(Windows)
-            {
-                bindFunc(cast(void**)&bgfx_win_set_hwnd, "bgfx_win_set_hwnd");
-            }
+	    bindFunc(cast(void**)&bgfx_set_platform_data, "bgfx_set_platform_data");
+			
         }
     }
 
