@@ -42,8 +42,12 @@ alias int8_t = byte;
 alias int16_t = short;
 alias int32_t = int;
 alias int64_t = long;
+alias uintptr_t = ulong;
 
 // bgfxdefines.h
+
+enum BGFX_API_VERSION = 11;
+
 
 enum ulong BGFX_STATE_RGB_WRITE            = 0x0000000000000001;
 enum ulong BGFX_STATE_ALPHA_WRITE          = 0x0000000000000002;
@@ -334,14 +338,17 @@ enum ushort BGFX_BUFFER_COMPUTE_READ_WRITE = 0
 enum uint BGFX_TEXTURE_NONE                = 0x00000000;
 enum uint BGFX_TEXTURE_U_MIRROR            = 0x00000001;
 enum uint BGFX_TEXTURE_U_CLAMP             = 0x00000002;
+enum uint BGFX_TEXTURE_U_BORDER            = 0x00000003;
 enum BGFX_TEXTURE_U_SHIFT                  = 0;
 enum uint BGFX_TEXTURE_U_MASK              = 0x00000003;
 enum uint BGFX_TEXTURE_V_MIRROR            = 0x00000004;
 enum uint BGFX_TEXTURE_V_CLAMP             = 0x00000008;
+enum uint BGFX_TEXTURE_V_BORDER            = 0x0000000c;
 enum BGFX_TEXTURE_V_SHIFT                  = 2;
 enum uint BGFX_TEXTURE_V_MASK              = 0x0000000c;
 enum uint BGFX_TEXTURE_W_MIRROR            = 0x00000010;
 enum uint BGFX_TEXTURE_W_CLAMP             = 0x00000020;
+enum uint BGFX_TEXTURE_W_BORDER            = 0x00000030;
 enum BGFX_TEXTURE_W_SHIFT                  = 4;
 enum uint BGFX_TEXTURE_W_MASK              = 0x00000030;
 enum uint BGFX_TEXTURE_MIN_POINT           = 0x00000040;
@@ -362,7 +369,7 @@ enum uint BGFX_TEXTURE_RT_MSAA_X8          = 0x00004000;
 enum uint BGFX_TEXTURE_RT_MSAA_X16         = 0x00005000;
 enum BGFX_TEXTURE_RT_MSAA_SHIFT            = 12;
 enum uint BGFX_TEXTURE_RT_MSAA_MASK        = 0x00007000;
-enum uint BGFX_TEXTURE_RT_BUFFER_ONLY      = 0x00008000;
+enum uint BGFX_TEXTURE_RT_WRITE_ONLY       = 0x00008000;
 enum uint BGFX_TEXTURE_RT_MASK             = 0x0000f000;
 enum uint BGFX_TEXTURE_COMPARE_LESS        = 0x00010000;
 enum uint BGFX_TEXTURE_COMPARE_LEQUAL      = 0x00020000;
@@ -376,8 +383,17 @@ enum BGFX_TEXTURE_COMPARE_SHIFT            = 16;
 enum uint BGFX_TEXTURE_COMPARE_MASK        = 0x000f0000;
 enum uint BGFX_TEXTURE_COMPUTE_WRITE       = 0x00100000;
 enum uint BGFX_TEXTURE_SRGB                = 0x00200000;
-enum BGFX_TEXTURE_RESERVED_SHIFT           = 24;
-enum uint BGFX_TEXTURE_RESERVED_MASK       = 0xff000000;
+enum uint BGFX_TEXTURE_BLIT_DST            = 0x00400000;
+enum uint BGFX_TEXTURE_READ_BACK           = 0x00800000;
+enum BGFX_TEXTURE_BORDER_COLOR_SHIFT       = 24;
+enum uint BGFX_TEXTURE_BORDER_COLOR_MASK   = 0x0f000000;
+enum BGFX_TEXTURE_RESERVED_SHIFT           = 28;
+enum uint BGFX_TEXTURE_RESERVED_MASK       = 0xf0000000;
+
+enum uint BGFX_TEXTURE_BORDER_COLOR(uint _index)
+{
+    return (_index << BGFX_TEXTURE_BORDER_COLOR_SHIFT) & BGFX_TEXTURE_BORDER_COLOR_MASK;
+}
 
 enum uint BGFX_TEXTURE_SAMPLER_BITS_MASK = 0
       | BGFX_TEXTURE_U_MASK
@@ -408,6 +424,11 @@ enum uint BGFX_RESET_FLUSH_AFTER_RENDER    = 0x00002000;
 enum uint BGFX_RESET_FLIP_AFTER_RENDER     = 0x00004000;
 enum uint BGFX_RESET_SRGB_BACKBUFFER       = 0x00008000;
 enum uint BGFX_RESET_HIDPI                 = 0x00010000;
+enum uint BGFX_RESET_DEPTH_CLAMP           = 0x00020000;
+enum uint BGFX_RESET_SUSPEND               = 0x00040000;
+
+enum BGFX_RESET_RESERVED_SHIFT             = 31;
+enum uint BGFX_RESET_RESERVED_MASK         = 0x80000000;
 
 ///
 enum ulong BGFX_CAPS_TEXTURE_COMPARE_LEQUAL = 0x0000000000000001;
@@ -426,25 +447,39 @@ enum ulong BGFX_CAPS_HMD                    = 0x0000000000001000;
 enum ulong BGFX_CAPS_INDEX32                = 0x0000000000002000;
 enum ulong BGFX_CAPS_DRAW_INDIRECT          = 0x0000000000004000;
 enum ulong BGFX_CAPS_HIDPI                  = 0x0000000000008000;
+enum ulong BGFX_CAPS_TEXTURE_BLIT           = 0x0000000000010000;
+enum ulong BGFX_CAPS_TEXTURE_READ_BACK      = 0x0000000000020000;
+enum ulong BGFX_CAPS_OCCLUSION_QUERY        = 0x0000000000040000;
 
 ///
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_NONE        = 0x00; //!< Texture format is not supported.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_COLOR       = 0x01; //!< Texture format is supported.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_COLOR_SRGB  = 0x02; //!< Texture as sRGB format is supported.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_EMULATED    = 0x04; //!< Texture format is emulated.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_VERTEX      = 0x08; //!< Texture format can be used from vertex shader.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_IMAGE       = 0x10; //!< Texture format can be used as image from compute shader.
-enum ubyte BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER = 0x20; //!< Texture format can be used as frame buffer.
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_NONE               = 0x0000;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_2D                 = 0x0001;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_2D_SRGB            = 0x0002;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_2D_EMULATED        = 0x0004;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_3D                 = 0x0008;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_3D_SRGB            = 0x0010;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_3D_EMULATED        = 0x0020;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_CUBE               = 0x0040;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_CUBE_SRGB          = 0x0080;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_CUBE_EMULATED      = 0x0100;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_VERTEX             = 0x0200;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_IMAGE              = 0x0400;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER        = 0x0800;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_FRAMEBUFFER_MSAA   = 0x1000;
+enum ushort BGFX_CAPS_FORMAT_TEXTURE_MSAA               = 0x2000;
 
 ///
 enum ubyte BGFX_VIEW_NONE   = 0x00;
 enum ubyte BGFX_VIEW_STEREO = 0x01;
 
 ///
-enum ubyte BGFX_SUBMIT_EYE_LEFT  = 0x01; //!<
-enum ubyte BGFX_SUBMIT_EYE_RIGHT  = 0x02; //!<
-enum ubyte BGFX_SUBMIT_EYE_MASK  = 0x03; //!<
-enum ubyte BGFX_SUBMIT_EYE_FIRST = BGFX_SUBMIT_EYE_LEFT;
+enum ubyte BGFX_SUBMIT_EYE_LEFT         = 0x01; //!<
+enum ubyte BGFX_SUBMIT_EYE_RIGHT        = 0x02; //!<
+enum ubyte BGFX_SUBMIT_EYE_MASK         = 0x03; //!<
+enum ubyte BGFX_SUBMIT_EYE_FIRST        = BGFX_SUBMIT_EYE_LEFT;
+
+enum BGFX_SUBMIT_RESERVED_SHIFT         = 7;
+enum ubyte BGFX_SUBMIT_RESERVED_MASK    = 0x80;
 
 ///
 enum ushort BGFX_PCI_ID_NONE                = 0x0000; //!< Autoselect adapter.
@@ -457,6 +492,14 @@ enum ushort BGFX_PCI_ID_NVIDIA              = 0x10de; //!< nVidia adapter.
 enum ubyte BGFX_HMD_NONE              = 0x00; //!< None.
 enum ubyte BGFX_HMD_DEVICE_RESOLUTION = 0x01; //!< Has HMD native resolution.
 enum ubyte BGFX_HMD_RENDERING         = 0x02; //!< Rendering to HMD.
+
+///
+enum ubyte BGFX_CUBE_MAP_POSITIVE_X = 0x00;
+enum ubyte BGFX_CUBE_MAP_NEGATIVE_X = 0x01;
+enum ubyte BGFX_CUBE_MAP_POSITIVE_Y = 0x02;
+enum ubyte BGFX_CUBE_MAP_NEGATIVE_Y = 0x03;
+enum ubyte BGFX_CUBE_MAP_POSITIVE_Z = 0x04;
+enum ubyte BGFX_CUBE_MAP_NEGATIVE_Z = 0x05;
 
 // bgfx.c99.h
 
@@ -548,6 +591,7 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_UNKNOWN,
 
     BGFX_TEXTURE_FORMAT_R1,
+    BGFX_TEXTURE_FORMAT_A8,
     BGFX_TEXTURE_FORMAT_R8,
     BGFX_TEXTURE_FORMAT_R8I,
     BGFX_TEXTURE_FORMAT_R8U,
@@ -557,6 +601,7 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_R16U,
     BGFX_TEXTURE_FORMAT_R16F,
     BGFX_TEXTURE_FORMAT_R16S,
+    BGFX_TEXTURE_FORMAT_R32I,
     BGFX_TEXTURE_FORMAT_R32U,
     BGFX_TEXTURE_FORMAT_R32F,
     BGFX_TEXTURE_FORMAT_RG8,
@@ -568,8 +613,14 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_RG16U,
     BGFX_TEXTURE_FORMAT_RG16F,
     BGFX_TEXTURE_FORMAT_RG16S,
+    BGFX_TEXTURE_FORMAT_RG32I,
     BGFX_TEXTURE_FORMAT_RG32U,
     BGFX_TEXTURE_FORMAT_RG32F,
+    BGFX_TEXTURE_FORMAT_RGB8,
+    BGFX_TEXTURE_FORMAT_RGB8I,
+    BGFX_TEXTURE_FORMAT_RGB8U,
+    BGFX_TEXTURE_FORMAT_RGB8S,
+    BGFX_TEXTURE_FORMAT_RGB9E5F,
     BGFX_TEXTURE_FORMAT_BGRA8,
     BGFX_TEXTURE_FORMAT_RGBA8,
     BGFX_TEXTURE_FORMAT_RGBA8I,
@@ -580,6 +631,7 @@ enum : bgfx_texture_format_t
     BGFX_TEXTURE_FORMAT_RGBA16U,
     BGFX_TEXTURE_FORMAT_RGBA16F,
     BGFX_TEXTURE_FORMAT_RGBA16S,
+    BGFX_TEXTURE_FORMAT_RGBA32I,
     BGFX_TEXTURE_FORMAT_RGBA32U,
     BGFX_TEXTURE_FORMAT_RGBA32F,
     BGFX_TEXTURE_FORMAT_R5G6B5,
@@ -631,6 +683,29 @@ enum : bgfx_backbuffer_ratio_t
 
 }
 
+alias bgfx_occlusion_query_result_t = int;
+enum : bgfx_occlusion_query_result_t
+{
+    BGFX_TOPOLOGY_CONVERT_TRI_LIST_FLIP_WINDING,
+    BGFX_TOPOLOGY_CONVERT_TRI_LIST_TO_LINE_LIST,
+    BGFX_TOPOLOGY_CONVERT_TRI_STRIP_TO_TRI_LIST,
+    BGFX_TOPOLOGY_CONVERT_LINE_STRIP_TO_LINE_LIST,
+
+    BGFX_TOPOLOGY_CONVERT_COUNT
+
+}
+
+alias bgfx_topology_convert_t = int;
+enum : bgfx_topology_convert_t
+{
+    BGFX_OCCLUSION_QUERY_RESULT_INVISIBLE,
+    BGFX_OCCLUSION_QUERY_RESULT_VISIBLE,
+    BGFX_OCCLUSION_QUERY_RESULT_NORESULT,
+
+    BGFX_OCCLUSION_QUERY_RESULT_COUNT
+
+}
+
 struct bgfx_indirect_buffer_handle_t
 {
 	ushort idx;
@@ -652,6 +727,11 @@ struct bgfx_frame_buffer_handle_t
 }
 
 struct bgfx_index_buffer_handle_t
+{
+    ushort idx;
+}
+
+struct bgfx_occlusion_query_handle_t
 {
     ushort idx;
 }
@@ -798,6 +878,14 @@ struct bgfx_texture_info_t
 
 }
 
+struct bgfx_attachment_t
+{
+    bgfx_texture_handle_t handle;
+    uint16_t mip;
+    uint16_t layer;
+    
+}
+
 struct bgfx_caps_gpu_t
 {
     uint16_t vendorId;
@@ -825,7 +913,7 @@ struct bgfx_caps_t
     uint16_t deviceId;
     bgfx_caps_gpu_t[4] gpu;
 
-    uint8_t[BGFX_TEXTURE_FORMAT_COUNT] formats;
+    uint16_t[BGFX_TEXTURE_FORMAT_COUNT] formats;
     
 }
 
@@ -845,8 +933,7 @@ enum : bgfx_fatal_t
     BGFX_FATAL_COUNT
 }
 
-//TODO: use namespace when DMD 2.066 is released
-extern(C++)/*, bgfx)*/ interface CallbackI
+extern(C++, bgfx) interface CallbackI
 {
     void fatal(bgfx_fatal_t _code, const(char)* _str);
     void traceVargs(const(char)* _filePath, uint16_t _line, const(char*) _format, va_list _argList);
@@ -859,11 +946,8 @@ extern(C++)/*, bgfx)*/ interface CallbackI
     void captureFrame(const(void)* _data, uint32_t _size);
 }
 
-//TODO: use namespace when DMD 2.066 is released
-extern(C++ /*, bx */) interface ReallocatorI
+extern(C++, bx) interface AllocatorI
 {
-    void* alloc(size_t _size, size_t _align, const(char)* _file, uint32_t _line);
-    void free(void* _ptr, size_t _align, const(char)* _file, uint32_t _line);
     void* realloc(void* _ptr, size_t _size, size_t _align, const(char)* _file, uint32_t _line);
 }
 
@@ -886,6 +970,13 @@ struct bgfx_platform_data_t
 	void* context;
 	void* backBuffer;
 	void* backBufferDS;
+
+}
+
+struct bgfx_internal_data_t
+{
+    bgfx_caps_t* caps;
+    void* context;
 
 }
 

@@ -5,7 +5,7 @@ A dynamic binding to [bgfx](https://github.com/bkaradzic/bgfx/) for the D Progra
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Aug 30, 2015 commit titled "D3D12: Cleanup."**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 10, 2016 commit titled "D3D12: Skip patching DXBC with Aon9 chunk."**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
