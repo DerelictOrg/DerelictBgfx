@@ -5,7 +5,7 @@ A dynamic binding to [bgfx](https://github.com/bkaradzic/bgfx/) for the D Progra
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 11, 2016 commit titled "Cleanup." (SHA:5184c6bfa29629217cbc3417357cca861f31ede8)**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 11, 2016 commit titled ["Cleanup."](https://github.com/bkaradzic/bgfx/commit/5184c6bfa29629217cbc3417357cca861f31ede8)**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
