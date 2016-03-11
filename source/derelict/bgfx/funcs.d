@@ -183,8 +183,8 @@ extern(C) @nogc nothrow
     alias da_bgfx_render_frame = bgfx_render_frame_t function();
     alias da_bgfx_set_platform_data = void function(const bgfx_platform_data_t* _data);
     alias da_bgfx_get_internal_data = bgfx_internal_data_t* function();
-	alias da_bgfx_override_internal_texture_ptr = uintptr_t function(bgfx_texture_handle_t _handle, uintptr_t _ptr);
-	alias da_bgfx_override_internal_texture = uintptr_t function(bgfx_texture_handle_t _handle, uint16_t _width, uint16_t _height, uint8_t _numMips, bgfx_texture_format_t _format, uint32_t _flags);
+    alias da_bgfx_override_internal_texture_ptr = uintptr_t function(bgfx_texture_handle_t _handle, uintptr_t _ptr);
+    alias da_bgfx_override_internal_texture = uintptr_t function(bgfx_texture_handle_t _handle, uint16_t _width, uint16_t _height, uint8_t _numMips, bgfx_texture_format_t _format, uint32_t _flags);
 }
 
 __gshared

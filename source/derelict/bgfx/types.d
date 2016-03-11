@@ -791,10 +791,10 @@ struct bgfx_hmd_t
     struct Eye
     {
         float[4] rotation;
-		float[3] translation;
-		float[4] fov;
-		float[3] adjust;
-		float[2] pixelsPerTanAngle;
+        float[3] translation;
+        float[4] fov;
+        float[3] adjust;
+        float[2] pixelsPerTanAngle;
     };
 
     Eye[2] eye;
@@ -965,11 +965,11 @@ enum : bgfx_render_frame_t
 
 struct bgfx_platform_data_t
 {
-	void* ndt;
-	void* nwh;
-	void* context;
-	void* backBuffer;
-	void* backBufferDS;
+    void* ndt;
+    void* nwh;
+    void* context;
+    void* backBuffer;
+    void* backBufferDS;
 
 }
 

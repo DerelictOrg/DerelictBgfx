@@ -194,12 +194,11 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_save_screen_shot, "bgfx_save_screen_shot");
 
             bindFunc(cast(void**)&bgfx_render_frame, "bgfx_render_frame");
-	        bindFunc(cast(void**)&bgfx_set_platform_data, "bgfx_set_platform_data");
-	        bindFunc(cast(void**)&bgfx_get_internal_data, "bgfx_get_internal_data");
-	        bindFunc(cast(void**)&bgfx_override_internal_texture_ptr, "bgfx_override_internal_texture_ptr");
-	        bindFunc(cast(void**)&bgfx_override_internal_texture, "bgfx_override_internal_texture");
-	        
-			
+            bindFunc(cast(void**)&bgfx_set_platform_data, "bgfx_set_platform_data");
+            bindFunc(cast(void**)&bgfx_get_internal_data, "bgfx_get_internal_data");
+            bindFunc(cast(void**)&bgfx_override_internal_texture_ptr, "bgfx_override_internal_texture_ptr");
+            bindFunc(cast(void**)&bgfx_override_internal_texture, "bgfx_override_internal_texture");
+
         }
     }
 
