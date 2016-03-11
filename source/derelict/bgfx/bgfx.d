@@ -13,7 +13,7 @@
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
  *
- * * Neither the names 'Derelict', 'DerelictILUT', nor the names of its contributors
+ * * Neither the names 'Derelict', 'DerelictBgfx', nor the names of its contributors
  *   may be used to endorse or promote products derived from this software
  *   without specific prior written permission.
  *
@@ -129,16 +129,22 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_update_texture_2d, "bgfx_update_texture_2d");
             bindFunc(cast(void**)&bgfx_update_texture_3d, "bgfx_update_texture_3d");
             bindFunc(cast(void**)&bgfx_update_texture_cube, "bgfx_update_texture_cube");
+            bindFunc(cast(void**)&bgfx_read_texture, "bgfx_read_texture");
+            bindFunc(cast(void**)&bgfx_read_frame_buffer, "bgfx_read_frame_buffer");
             bindFunc(cast(void**)&bgfx_destroy_texture, "bgfx_destroy_texture");
             bindFunc(cast(void**)&bgfx_create_frame_buffer, "bgfx_create_frame_buffer");
             bindFunc(cast(void**)&bgfx_create_frame_buffer_scaled, "bgfx_create_frame_buffer_scaled");
-            bindFunc(cast(void**)&bgfx_create_frame_buffer_from_handles, "bgfx_create_frame_buffer_from_handles");
+            bindFunc(cast(void**)&bgfx_create_frame_buffer_from_attachment, "bgfx_create_frame_buffer_from_attachment");
             bindFunc(cast(void**)&bgfx_destroy_frame_buffer, "bgfx_destroy_frame_buffer");
             bindFunc(cast(void**)&bgfx_create_uniform, "bgfx_create_uniform");
             bindFunc(cast(void**)&bgfx_destroy_uniform, "bgfx_destroy_uniform");
-            bindFunc(cast(void**)&bgfx_set_clear_color, "bgfx_set_clear_color");
+            bindFunc(cast(void**)&bgfx_create_occlusion_query, "bgfx_create_occlusion_query");
+            bindFunc(cast(void**)&bgfx_get_result, "bgfx_get_result");
+            bindFunc(cast(void**)&bgfx_destroy_occlusion_query, "bgfx_destroy_occlusion_query");
+            bindFunc(cast(void**)&bgfx_set_palette_color, "bgfx_set_palette_color");
             bindFunc(cast(void**)&bgfx_set_view_name, "bgfx_set_view_name");
             bindFunc(cast(void**)&bgfx_set_view_rect, "bgfx_set_view_rect");
+            bindFunc(cast(void**)&bgfx_set_view_rect_auto, "bgfx_set_view_rect_auto");
             bindFunc(cast(void**)&bgfx_set_view_scissor, "bgfx_set_view_scissor");
             bindFunc(cast(void**)&bgfx_set_view_clear, "bgfx_set_view_clear");
             bindFunc(cast(void**)&bgfx_set_view_clear_mrt, "bgfx_set_view_clear_mrt");
@@ -147,8 +153,10 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_set_view_transform, "bgfx_set_view_transform");
             bindFunc(cast(void**)&bgfx_set_view_transform_stereo, "bgfx_set_view_transform_stereo");
             bindFunc(cast(void**)&bgfx_set_view_remap, "bgfx_set_view_remap");
+            bindFunc(cast(void**)&bgfx_reset_view, "bgfx_reset_view");
             bindFunc(cast(void**)&bgfx_set_marker, "bgfx_set_marker");
             bindFunc(cast(void**)&bgfx_set_state, "bgfx_set_state");
+            bindFunc(cast(void**)&bgfx_set_condition, "bgfx_set_condition");
             bindFunc(cast(void**)&bgfx_set_stencil, "bgfx_set_stencil");
             bindFunc(cast(void**)&bgfx_set_scissor, "bgfx_set_scissor");
             bindFunc(cast(void**)&bgfx_set_scissor_cached, "bgfx_set_scissor_cached");
@@ -169,6 +177,7 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_set_texture_from_frame_buffer, "bgfx_set_texture_from_frame_buffer");
             bindFunc(cast(void**)&bgfx_touch, "bgfx_touch");
             bindFunc(cast(void**)&bgfx_submit, "bgfx_submit");
+            bindFunc(cast(void**)&bgfx_submit_occlusion_query, "bgfx_submit_occlusion_query");
             bindFunc(cast(void**)&bgfx_submit_indirect, "bgfx_submit_indirect");
             bindFunc(cast(void**)&bgfx_set_image, "bgfx_set_image");
             bindFunc(cast(void**)&bgfx_set_image_from_frame_buffer, "bgfx_set_image_from_frame_buffer");
@@ -180,11 +189,16 @@ class DerelictBgfxLoader : SharedLibLoader
             bindFunc(cast(void**)&bgfx_dispatch, "bgfx_dispatch");
             bindFunc(cast(void**)&bgfx_dispatch_indirect, "bgfx_dispatch_indirect");
             bindFunc(cast(void**)&bgfx_discard, "bgfx_discard");
+            bindFunc(cast(void**)&bgfx_blit, "bgfx_blit");
+            bindFunc(cast(void**)&bgfx_blit_frame_buffer, "bgfx_blit_frame_buffer");
             bindFunc(cast(void**)&bgfx_save_screen_shot, "bgfx_save_screen_shot");
 
             bindFunc(cast(void**)&bgfx_render_frame, "bgfx_render_frame");
-	    bindFunc(cast(void**)&bgfx_set_platform_data, "bgfx_set_platform_data");
-			
+            bindFunc(cast(void**)&bgfx_set_platform_data, "bgfx_set_platform_data");
+            bindFunc(cast(void**)&bgfx_get_internal_data, "bgfx_get_internal_data");
+            bindFunc(cast(void**)&bgfx_override_internal_texture_ptr, "bgfx_override_internal_texture_ptr");
+            bindFunc(cast(void**)&bgfx_override_internal_texture, "bgfx_override_internal_texture");
+
         }
     }
 
