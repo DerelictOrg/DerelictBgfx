@@ -5,7 +5,7 @@ A dynamic binding to [bgfx](https://github.com/bkaradzic/bgfx/) for the D Progra
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 11, 2016 commit titled ["Cleanup."](https://github.com/bkaradzic/bgfx/commit/5184c6bfa29629217cbc3417357cca861f31ede8)**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 15, 2016 commit titled ["Added error when bgfx::init is called without bgfx::setPlatformData."](https://github.com/bkaradzic/bgfx/commit/2aa7c9a14af6b2e675951e76f940f3b1107a2bf3)**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
