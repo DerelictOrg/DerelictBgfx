@@ -1,3 +1,4 @@
 .dub
 /bin/*
 /lib/*
+dub.selections.json
