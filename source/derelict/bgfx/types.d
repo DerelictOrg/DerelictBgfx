@@ -46,7 +46,7 @@ alias uintptr_t = ulong;
 
 // bgfxdefines.h
 
-enum BGFX_API_VERSION = 12;
+enum BGFX_API_VERSION = 13;
 
 
 enum ulong BGFX_STATE_RGB_WRITE                 = 0x0000000000000001;
@@ -109,6 +109,7 @@ enum ulong BGFX_STATE_POINT_SIZE_MASK           = 0x00f0000000000000;
 
 enum ulong BGFX_STATE_MSAA                      = 0x0100000000000000;
 enum ulong BGFX_STATE_LINEAA                    = 0x0200000000000000;
+enum ulong BGFX_STATE_CONSERVATIVE_RASTER       = 0x0400000000000000;
 
 enum ulong BGFX_STATE_RESERVED_MASK             = 0xe000000000000000;
 
@@ -453,6 +454,7 @@ enum ulong BGFX_CAPS_TEXTURE_BLIT           = 0x0000000000010000;
 enum ulong BGFX_CAPS_TEXTURE_READ_BACK      = 0x0000000000020000;
 enum ulong BGFX_CAPS_OCCLUSION_QUERY        = 0x0000000000040000;
 enum ulong BGFX_CAPS_ALPHA_TO_COVERAGE      = 0x0000000000080000;
+enum ulong BGFX_CAPS_CONSERVATIVE_RASTER    = 0x0000000000100000;
 
 ///
 enum ushort BGFX_CAPS_FORMAT_TEXTURE_NONE               = 0x0000;
