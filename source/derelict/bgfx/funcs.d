@@ -161,9 +161,9 @@ extern(C) @nogc nothrow
     alias da_bgfx_set_texture = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_texture_handle_t _handle, uint32_t _flags = uint32_t.max);
     alias da_bgfx_set_texture_from_frame_buffer = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_frame_buffer_handle_t _handle, uint8_t _attachment = 0, uint32_t _flags = uint32_t.max);
     alias da_bgfx_touch = uint32_t function(uint8_t _id);
-    alias da_bgfx_submit = uint32_t function(uint8_t _id, bgfx_program_handle_t _handle, int32_t _depth, bool _preserveState = false);
-    alias da_bgfx_submit_occlusion_query = uint32_t function(uint8_t _id, bgfx_program_handle_t _program, bgfx_occlusion_query_handle_t _occlusionQuery, int32_t _depth, bool _preserveState = false);
-    alias da_bgfx_submit_indirect = uint32_t function(uint8_t _id, bgfx_program_handle_t _handle, bgfx_indirect_buffer_handle_t _indirectHandle, uint16_t _start, uint16_t _num, int32_t _depth, bool _preserveState = false);
+    alias da_bgfx_submit = uint32_t function(uint8_t _id, bgfx_program_handle_t _handle, int32_t _depth = 0, bool _preserveState = false);
+    alias da_bgfx_submit_occlusion_query = uint32_t function(uint8_t _id, bgfx_program_handle_t _program, bgfx_occlusion_query_handle_t _occlusionQuery, int32_t _depth = 0, bool _preserveState = false);
+    alias da_bgfx_submit_indirect = uint32_t function(uint8_t _id, bgfx_program_handle_t _handle, bgfx_indirect_buffer_handle_t _indirectHandle, uint16_t _start = 0, uint16_t _num = 1, int32_t _depth = 0, bool _preserveState = false);
     alias da_bgfx_set_image = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_texture_handle_t _handle, uint8_t _mip, bgfx_access_t _access, bgfx_texture_format_t _format);
     alias da_bgfx_set_image_from_frame_buffer = void function(uint8_t _stage, bgfx_uniform_handle_t _sampler, bgfx_frame_buffer_handle_t _handle, uint8_t _attachment, bgfx_access_t _access, bgfx_texture_format_t _format);
     alias da_bgfx_set_compute_index_buffer = void function(uint8_t _stage, bgfx_index_buffer_handle_t _handle, bgfx_access_t _access);
