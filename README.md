@@ -5,7 +5,7 @@ A dynamic binding to [bgfx](https://github.com/bkaradzic/bgfx/) for the D Progra
 
 **Warning: these bindings do not come with bgfx binaries.**
 
-**Note: this DerelictBgfx binding commit is in sync with bgfx Mar 20, 2016 commit titled ["ios-simulator: Disable Metal."](https://github.com/bkaradzic/bgfx/commit/a7a49ead60d304472e71ec2866081eeebdfa1526)**
+**Note: this DerelictBgfx binding commit is in sync with bgfx Apr 10, 2016 commit titled ["Cleanup."](https://github.com/bkaradzic/bgfx/commit/3a35dbcf39fcef2c00664dc5b51203f9b51e0741)**
 
 More information on how to build bgfx is available here: https://github.com/bkaradzic/bgfx/
 
