@@ -37,8 +37,6 @@ module derelict.bgfx.funcs;
 private
 {
     import derelict.bgfx.types;
-    import derelict.util.xtypes;
-    import derelict.util.wintypes;
     import derelict.util.system;
 }
 
